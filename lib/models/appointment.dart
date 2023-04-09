@@ -1,50 +1,64 @@
-import 'dart:convert';
+class AppointmentModel {
+  bool? success;
+  String? message;
+  List<Data>? data;
 
+  AppointmentModel(
+      {required this.success, required this.message, required this.data});
 
+  AppointmentModel.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    message = json['message'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
 
-List<AppointmentModel> appointmentFromJson(String str)=>
-    List<AppointmentModel>.from(json.decode(str).map((x)=>AppointmentModel.fromJson(x)));
-String productToJson(List<AppointmentModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
+    data['data'] = this.data!.map((v) => v.toJson()).toList();
+    return data;
+  }
+}
 
+class Data {
+  String? id;
+  String? doctorId;
+  String? date;
+  String? fromTime;
+  String? toTime;
+  String? status;
 
-class AppointmentModel{
-   AppointmentModel({
-     required this.appointmentid,
-     required this.doctorid,
-     required this.patientid,
-     required this.date,
-     required this.time,
-     required this.description,
-     required this.status,
+  Data(
+      {required this.id,
+      required this.doctorId,
+      required this.date,
+      required this.fromTime,
+      required this.toTime,
+      required this.status});
 
-  });
-  String appointmentid;
-  String doctorid;
-  String patientid;
-  String date;
-  String time;
-  String description;
-  String status;
-  
-  
-  factory AppointmentModel.fromJson(Map<String,dynamic>json)=> AppointmentModel(
-    appointmentid: json['id'] ,
-    doctorid: json['doctorid'],
-    patientid: json['patientid'],
-    date: json['date'],
-    time: json['time'],
-    description: json['description'],
-    status: json['status'],
-  );
-  Map<String,dynamic> toJson()=>{
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    doctorId = json['doctor_id'];
+    date = json['date'];
+    fromTime = json['from_time'];
+    toTime = json['to_time'];
+    status = json['status'];
+  }
 
-      'id':appointmentid,
-      'doctorid':doctorid,
-      'patientid':patientid,
-      'date':date,
-      'time':time,
-      'description':description,
-      'status':status,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['doctor_id'] = doctorId;
+    data['date'] = date;
+    data['from_time'] = fromTime;
+    data['to_time'] = toTime;
+    data['status'] = status;
+    return data;
+  }
 }
