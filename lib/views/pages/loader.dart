@@ -12,40 +12,40 @@ class Loader extends StatefulWidget {
 }
 
 class _LoaderState extends State<Loader> {
-  final AuthService authService =AuthService();
- 
- @override
-  void initState(){
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
     //TODO: implement initState
     super.initState();
     checkifAuthenticated();
   }
-  checkifAuthenticated() async {
 
+  checkifAuthenticated() async {
     await Future.delayed(const Duration(seconds: 2));
-    var token=await authService.getToken();
-    if (token!= null){
+    var token = await authService.getToken();
+    if (token != null) {
       Get.offAll(const HomePage());
-    } else{
-      Get.offAll( LoginScreen());
+    } else {
+      Get.offAll(LoginScreen());
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              "assets/images/logo.png",
-              height: 200,
-              width: 200,
-            ),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Image.asset(
+            "assets/images/logo.png",
+            height: 200,
+            width: 200,
           ),
-          const Center(
-          child: CircularProgressIndicator()),
-        ],
-      ));
+        ),
+        const Center(child: CircularProgressIndicator()),
+      ],
+    ));
   }
 }

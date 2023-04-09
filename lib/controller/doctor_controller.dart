@@ -15,7 +15,7 @@ class DoctorController extends GetxController{
   AuthService authService=AuthService();
   var isLoading = false.obs;
   
-  Rx<List<Doctor>> doctorsList=Rx<List<Doctor>>([]);
+  Rx<List<Data>> doctorsList=Rx<List<Data>>([]);
 
   @override
   void onInit(){
@@ -34,7 +34,7 @@ class DoctorController extends GetxController{
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
         doctorsList.value = (jsonResponse["data"] as List)
-            .map((e) => Doctor.fromJson(e))
+            .map((e) => Data.fromJson(e))
             .toList();
       } else {
         showMessage(message: jsonResponse["message"], isSuccess: false);
