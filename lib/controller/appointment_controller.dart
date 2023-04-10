@@ -31,7 +31,7 @@ class AppointmentController extends GetxController {
     var data = {
       //ToDO: replace static patientid with current user.
       'doctorid': doctorid,
-      'patientid': '1',
+      'patientid':"12",
       'date': date,
       'from': fromTime,
       'to': toTime,

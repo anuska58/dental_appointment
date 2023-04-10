@@ -46,70 +46,72 @@ class AppointmentTab extends StatelessWidget {
                     softWrap: false,
                   )),
             ),
-            Obx(() => SizedBox(
-                  height: (controller.doctorsList.value.length) * 150,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: controller.doctorsList.value.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Get.to(BookAppointment(
-                            id: controller.doctorsList.value[index].id!,
-                            doctorName:
-                                controller.doctorsList.value[index].name!,
-                          ));
-                        },
-                        child: Card(
-                          elevation: 8.0,
-                          child: ListTile(
-                            leading: const Icon(
-                              Icons.person,
-                              size: 100,
-                            ),
-                            title: Text(
-                                controller.doctorsList.value[index].name!,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    height: 3)),
-                            subtitle: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+            Obx(() => Center(
+              child: SizedBox(
+                    height: (controller.doctorsList.value.length) * 150,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: controller.doctorsList.value.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(BookAppointment(
+                              id: controller.doctorsList.value[index].id!,
+                              doctorName:
+                                  controller.doctorsList.value[index].name!,
+                            ));
+                          },
+                          child: Card(
+                            elevation: 8.0,
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.person,
+                                size: 100,
+                              ),
+                              title: Text(
+                                  controller.doctorsList.value[index].name!,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      height: 3)),
+                              subtitle: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      controller
+                                          .doctorsList.value[index].education!,
+                                      style: const TextStyle(fontSize: 16)),
+                                  Text(
                                     controller
-                                        .doctorsList.value[index].education!,
-                                    style: const TextStyle(fontSize: 16)),
-                                Text(
-                                  controller
-                                      .doctorsList.value[index].experience!,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  controller
-                                      .doctorsList.value[index].nmcNumber!,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  controller
-                                      .doctorsList.value[index].experience!,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Divider(
-                                  height: 1,
-                                  thickness: 1,
-                                  color: Colors.grey[300],
-                                )
-                              ],
+                                        .doctorsList.value[index].experience!,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    controller
+                                        .doctorsList.value[index].nmcNumber!,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    controller
+                                        .doctorsList.value[index].experience!,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    color: Colors.grey[300],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                )),
+            )),
           ],
         ),
       ),

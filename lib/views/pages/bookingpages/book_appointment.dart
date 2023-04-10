@@ -45,7 +45,6 @@ class _BookAppointmentState extends State<BookAppointment> {
       appBar: AppBar(
         title: const Text('BOOK AN APPOINTMENT',
             style: TextStyle(
-              fontFamily: 'Roboto',
               fontSize: 20,
               color: primaryColor,
               fontWeight: FontWeight.w700,
