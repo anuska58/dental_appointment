@@ -94,7 +94,7 @@ class ProfileComponent extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () => Get.to(() => UpdateProfilePage()),
             style: ElevatedButton.styleFrom(
-                //backgroundColor: primaryColor,
+                backgroundColor: primaryColor,
                 side: BorderSide.none,
                 shape: const StadiumBorder()),
             child: const Text("Edit Profile",

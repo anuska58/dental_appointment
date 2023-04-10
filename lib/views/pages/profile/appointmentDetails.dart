@@ -104,7 +104,7 @@ class _AppointmentDetailsState extends State<AppointmentDetails> {
       });
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

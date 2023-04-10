@@ -135,7 +135,7 @@ class _BookAppointmentState extends State<BookAppointment> {
               ),
               Obx(() => (SizedBox(
                     height:
-                        (scheduleController.scheduleList.value.length) * 150,
+                        (scheduleController.scheduleList.value.length) * 70,
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: scheduleController.scheduleList.value.length,
@@ -143,7 +143,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                         return GestureDetector(
                           onTap: () {},
                           child: SizedBox(
-                            height: 200,
+                            height: 60,
                             child: ListView(
                               children: <Widget>[
                                 CheckboxListTile(
@@ -209,10 +209,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                     // Get.to(
                     //   () => const KhaltieApp()),
                     child: const Text(
-                      "Make Booking Request ",
+                      "BOOK",
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         color: primaryColor,
                       ),
                     ),
@@ -254,10 +254,9 @@ class _BookAppointmentState extends State<BookAppointment> {
                     child: const Text(
                       'CANCEL',
                       style: TextStyle(
-                        fontFamily: 'Segoe UI',
                         fontSize: 20,
                         color: primaryColor,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                       ),
                       softWrap: false,
                     ),

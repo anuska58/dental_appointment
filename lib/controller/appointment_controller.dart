@@ -29,9 +29,9 @@ class AppointmentController extends GetxController {
     log("Message from controller:$doctorid,$fromTime,$toTime,$date,$currentUser");
 
     var data = {
-      //ToDO: replace static patientid with current user.
+      'token': await authService.getToken(),
       'doctorid': doctorid,
-      'patientid':"12",
+      //'patientid':"12",
       'date': date,
       'from': fromTime,
       'to': toTime,

@@ -38,7 +38,6 @@ class AppointmentTab extends StatelessWidget {
                   child: Text(
                     'BOOK AN APPOINTMENT',
                     style: TextStyle(
-                      fontFamily: 'Roboto',
                       fontSize: 20,
                       color: Color(0xff2e3192),
                       fontWeight: FontWeight.w700,

@@ -50,23 +50,23 @@ class _AppointmentPageState extends State<AppointmentPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         shadowColor: Colors.white,
-        backgroundColor: Color.fromRGBO(99, 180, 255, 0.1),
+        backgroundColor: const Color.fromRGBO(99, 180, 255, 0.1),
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Appointment",
                   
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 45,
                 ),
-                Text(
+                const Text(
                   "Doctor",
                   
                 ),
@@ -74,15 +74,15 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   controller: doctorController,
                   readOnly: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 35,
                 ),
-                Text(
+                const Text(
                   "Date",
                   
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.calendar_month,
                       color: Color(0xff8696BB),
@@ -91,15 +91,15 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   readOnly: true,
                   controller: dateController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 35,
                 ),
-                Text(
+                const Text(
                   "Time",
                   
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     icon: Icon(
                       Icons.timer_outlined,
                       color: Color(0xff8696BB),
@@ -108,10 +108,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   readOnly: true,
                   controller: timeController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 35,
                 ),
-                Text(
+                const Text(
                   "Description",
                   
                 ),
@@ -120,7 +120,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                   controller: descriptionController,
                   maxLines: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Center(
@@ -128,16 +128,16 @@ class _AppointmentPageState extends State<AppointmentPage> {
                             widget.appointmentStatus ==
                                 widget.appointmentStatus)
                         ? Column(children: [
-                            Text(
+                            const Text(
                               "Set Status",
                             ),
                             DropdownButtonFormField(
                               items: [
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                   value: "accepted",
                                   child: Text("Accepted"),
                                 ),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                   value: "rejected",
                                   child: Text("Rejected"),
                                 ),
@@ -153,7 +153,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(
                                     builder: (context) {
-                                      return HomePage();
+                                      return const HomePage();
                                     },
                                   ));
                                   return;
@@ -166,12 +166,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                 Navigator.pushReplacement(context,
                                     MaterialPageRoute(
                                   builder: (context) {
-                                    return HomePage();
+                                    return const HomePage();
                                   },
                                 ));
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 50,
                             ),
                           ])
