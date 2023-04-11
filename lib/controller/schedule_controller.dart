@@ -16,6 +16,7 @@ class ScheduleController extends GetxController {
 
   Rx<List<schedule.Data>> scheduleList = Rx<List<schedule.Data>>([]);
 
+  //getSchedule time of doctor provided by the admin
   getSchedule({
     required String doctorid,
     required String dayofweek,
@@ -45,7 +46,5 @@ class ScheduleController extends GetxController {
     } else {
       print('Request failed with status: ${response.statusCode}');
     }
-    //else{
-    //print('Request failed with status: ${response.statusCode}.');
   }
 }

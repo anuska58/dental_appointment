@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dental_appointment_anuska_fyp/utils/constants.dart';
+import 'package:dental_appointment_anuska_fyp/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -189,22 +190,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                           toTime: endTimeController,
                           date: dateController.text);
                       log("Message:${widget.id},$startTimeController,$endTimeController,${dateController.text}");
-
-                      // if (response == true) {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Booking request made sucessifully!'),
-                      //       duration: Duration(seconds: 2),
-                      //     ),
-                      //   );
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Booking request failed!'),
-                      //       duration: Duration(seconds: 2),
-                      //     ),
-                      //   );
-                      // }
                     },
                     // Get.to(
                     //   () => const KhaltieApp()),
@@ -222,6 +207,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                       width: 30,
                     ),
                   ),
+
                   //Booking Cancellation
                   TextButton(
                     onPressed: () => showDialog<String>(
@@ -242,7 +228,11 @@ class _BookAppointmentState extends State<BookAppointment> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Get.to(() => BookAppointment()),
+                            onPressed: () => Navigator.pushReplacement(
+                              context, MaterialPageRoute(
+                                builder:(context)=>const HomePage()
+                                )
+                              ),
                             child: const Text(
                               'Confirm',
                               style: TextStyle(color: primaryColor),

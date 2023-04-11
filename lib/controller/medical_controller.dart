@@ -19,11 +19,11 @@ class MedicalReportController extends GetxController{
     getMedicalReportByID();
   }
 
- 
+ //get medical report uploaded by admin
   getMedicalReportByID() async {
     isLoading.value = true;
     var url = Uri.parse(GET_MEDICAL_REPORT_BY_ID);
-    var token=await authService.getToken();
+    var token=await authService.getToken();   //get token in order to get user id
     var response = await http.post(url,body: {"token": token});
     isLoading.value = false;
     if (response.statusCode == 200) {

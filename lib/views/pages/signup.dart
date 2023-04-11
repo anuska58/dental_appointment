@@ -42,7 +42,7 @@ class SignupScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black
+                      color: primaryColor
                     )),
                   Padding(
                     padding: const EdgeInsets.only(top:10),
@@ -50,9 +50,11 @@ class SignupScreen extends StatelessWidget {
                       prefixIcon:const Icon(Icons.email_outlined),
                       controller: emailController,
                       myValidator: (value){
-                        if(!value.toString().contains("@")){
-                          return"Email is not valid";
-                        }
+                        final regex = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                          if (!regex.hasMatch(value)) {
+                            return 'Not a valid email';
+                          }
                         return null;
                       }
                     ),
@@ -76,15 +78,27 @@ class SignupScreen extends StatelessWidget {
                     obscureText: true,
                     prefixIcon:const Icon(Icons.key_outlined),
                     controller: passwordController,
-                    myValidator: (value)=>null 
+                    myValidator: (value){
+                      RegExp regex = RegExp(
+                              r'^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
+                          //validate password
+                          if (!regex.hasMatch(value)) {
+                            return 'include a minimum of eight characters,\nat least one letter, number and a special character.';
+                          }
+                          return null;
+                    }
                     ),
-                    // MyField(
-                    // text: "Confirm Password",
-                    // obscureText: true,
-                    // prefixIcon:const Icon(Icons.key_outlined),
-                    // controller: confirmPasswordController,
-                    // myValidator: (value)=>null 
-                    // ),
+                    MyField(
+                    text: "Confirm Password",
+                    obscureText: true,
+                    prefixIcon:const Icon(Icons.key_outlined),
+                    controller: confirmPasswordController,
+                    myValidator: (value){
+                      if(value !=passwordController.text){
+                        return 'The password does not match';
+                      }
+                    }
+                    ),
                     MyField(
                     text: "Address",
                     prefixIcon:const Icon(Icons.location_city_outlined),
@@ -93,7 +107,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                     MyField(
                     text: "Gender",
-                    prefixIcon:const Icon(Icons.person),
+                    prefixIcon:const Icon(Icons.wc),
                     controller: genderController,
                     myValidator: (value)=>null 
                     ),

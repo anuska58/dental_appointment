@@ -45,10 +45,13 @@ class LoginScreen extends StatelessWidget {
                     controller: emailController,
                     prefixIcon:const Icon(Icons.email_outlined),
                     myValidator: (value) {
-                      if (!value.toString().contains("@")) {
-                        return "Email is not valid";
-                      }
-                      return null;
+                      final regex = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                          if (!regex.hasMatch(value)) {
+                            return 'Not a valid email';
+                          }
+                        return null;
+                      
                     },
                   ),
                   MyField(

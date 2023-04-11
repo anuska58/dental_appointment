@@ -23,8 +23,7 @@ class DoctorController extends GetxController{
     get();
   }
 
-
-    
+  //get doctors data
   get() async {
     isLoading.value = true;
     var url = Uri.parse(GET_DOCTOR_API);
@@ -33,7 +32,7 @@ class DoctorController extends GetxController{
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
-        doctorsList.value = (jsonResponse["data"] as List)
+        doctorsList.value = (jsonResponse["data"] as List) //convert ta obtained data as list
             .map((e) => Data.fromJson(e))
             .toList();
       } else {
@@ -45,4 +44,3 @@ class DoctorController extends GetxController{
   }
 }
   
-//}

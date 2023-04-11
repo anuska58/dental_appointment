@@ -21,6 +21,7 @@ class UserController extends GetxController{
     getUserID();
     getUserDetails();
   }
+  //get user id by passing the token
   getUserID() async{
     var url=Uri.parse(GET_USER_ID_API);
     var token_ = await authService.getToken();
@@ -42,7 +43,7 @@ class UserController extends GetxController{
   }
 
 
-  
+  //get the details of the user
   getUserDetails() async{
     var url = Uri.parse(GET_USER_DETAILS_API);
     var token_ = await authService.getToken();
@@ -62,6 +63,8 @@ class UserController extends GetxController{
       print('Request failed with status: ${response.statusCode}.');
     }
   }
+
+  //controller for update profile
   updateProfile(data) async {
   var url = Uri.parse(EDIT_PROFILE_API);
   data['token'] = await authService.getToken();
@@ -70,8 +73,6 @@ class UserController extends GetxController{
     var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
     log('jsonResponse: $jsonResponse');
     if (jsonResponse != null && jsonResponse["success"]) {
-      // var data = jsonResponse["data"] as List<dynamic>? ?? [];
-      // usersList.value = data.map((e) => User.fromJson(e)).toList();
       getUserDetails();
       Get.back();
       showMessage(message: jsonResponse['message'], isSuccess: true);
