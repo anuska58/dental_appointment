@@ -16,16 +16,12 @@ class ScheduleController extends GetxController {
 
   Rx<List<schedule.Data>> scheduleList = Rx<List<schedule.Data>>([]);
 
-  //getSchedule time of doctor provided by the admin
-  getSchedule({
-    required String doctorid,
-    required String dayofweek,
-  }) async {
+  getSchedule(
+      {required String date,
+      required String doctorid,
+      required String dayofweek}) async {
     isLoading.value = true;
-    var data = {
-      'doctorid': doctorid,
-      'dayOfWeek': dayofweek,
-    };
+    var data = {'doctorid': doctorid, 'dayOfWeek': dayofweek, 'date': date};
     var url = Uri.parse(GET_SELECTABLE_TIMES);
     var response = await http.post(url, body: data);
     isLoading.value = false;
@@ -34,11 +30,14 @@ class ScheduleController extends GetxController {
       log(jsonResponse.toString());
 
       if (jsonResponse["success"] != null) {
-        scheduleList.value = (jsonResponse["data"] as List)
-            .map((e) => schedule.Data.fromJson(e))
-            .toList();
-        log(jsonResponse.toString());
-        update();
+        if (jsonResponse["data"] != null) {
+          scheduleList.value = (jsonResponse["data"] as List)
+              .map((e) => schedule.Data.fromJson(e))
+              .toList();
+          log(jsonResponse.toString());
+
+          update();
+        }
       } else {
         showMessage(
             message: jsonResponse["message"].toString(), isSuccess: false);
@@ -46,5 +45,7 @@ class ScheduleController extends GetxController {
     } else {
       print('Request failed with status: ${response.statusCode}');
     }
+    //else{
+    //print('Request failed with status: ${response.statusCode}.');
   }
 }

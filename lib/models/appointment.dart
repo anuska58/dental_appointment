@@ -1,32 +1,4 @@
 class AppointmentModel {
-  bool? success;
-  String? message;
-  List<Data>? data;
-
-  AppointmentModel(
-      {required this.success, required this.message, required this.data});
-
-  AppointmentModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['message'] = message;
-    data['data'] = this.data!.map((v) => v.toJson()).toList();
-    return data;
-  }
-}
-
-class Data {
   String? id;
   String? doctorId;
   String? date;
@@ -34,7 +6,7 @@ class Data {
   String? toTime;
   String? status;
 
-  Data(
+  AppointmentModel(
       {required this.id,
       required this.doctorId,
       required this.date,
@@ -42,7 +14,7 @@ class Data {
       required this.toTime,
       required this.status});
 
-  Data.fromJson(Map<String, dynamic> json) {
+ AppointmentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     doctorId = json['doctor_id'];
     date = json['date'];

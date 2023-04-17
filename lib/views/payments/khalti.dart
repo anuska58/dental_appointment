@@ -1,7 +1,12 @@
 import 'package:dental_appointment_anuska_fyp/utils/constants.dart';
+import 'package:dental_appointment_anuska_fyp/views/pages/home_page.dart';
+import 'package:dental_appointment_anuska_fyp/views/pages/tabs/appointment_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khalti/khalti.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+
+import '../pages/profile/appointmentDetails.dart';
 
 class KhaltieApp extends StatelessWidget {
   
@@ -136,15 +141,18 @@ class _WalletPaymentState extends State<WalletPayment> {
                       transactionPin: _pinController.text,
                     ),
                   );
-                  showDialog(
-                  context: (context), 
-                  builder: (context){
-                  return AlertDialog(
-                    title: const Text('Payment Successful'),
-                    content: Text ('Verification Token: ${model.token}'),
-                    );
-                  }
-                  );
+                  // showDialog(
+                  // context: (context), 
+                  // builder: (context){
+                  // return AlertDialog(
+                  //   title: const Text('Payment Successful'),
+                  //   content: Text ('Verification Token: ${model.token}'),
+                  //   );
+                  // }
+                  
+                  // );
+                   showMessage(message: 'Payment Successful\nAppointment Booked Successfully');
+                   Get.to(HomePage());
 
                   debugPrint(model.toString());
                 } catch (e) {
@@ -152,6 +160,7 @@ class _WalletPaymentState extends State<WalletPayment> {
                     SnackBar(content: Text(e.toString())),
                   );
                 }
+                
               }
             },
              style: ElevatedButton.styleFrom(

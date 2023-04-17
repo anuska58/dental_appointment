@@ -17,7 +17,7 @@ class ProfileBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: 240,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -29,9 +29,9 @@ class ProfileBottomSheet extends StatelessWidget {
           const Center(
             child: Icon(Icons.keyboard_double_arrow_down_outlined, color: primaryColor,)),
               ProfileMenuWidget(title: "Medical Report",icon: Icons.medical_information_outlined,onPressed: ()=>Get.to(()=>Report())) ,
-              ProfileMenuWidget(title: "Appointment",icon: Icons.schedule_outlined,onPressed: ()=>Get.to(()=>AppointmentDetails())) ,
-              ProfileMenuWidget(title: "Settings",icon: Icons.settings_outlined,onPressed: (){}) ,
-              ProfileMenuWidget(title: "Transactions",icon: Icons.wallet,onPressed: (){}) ,
+              ProfileMenuWidget(title: "Appointment",icon: Icons.schedule_outlined,onPressed: ()=>Get.to(()=>MyAppointmentsPage())) ,
+             // ProfileMenuWidget(title: "Settings",icon: Icons.settings_outlined,onPressed: (){}) ,
+              //ProfileMenuWidget(title: "Transactions",icon: Icons.wallet,onPressed: (){}) ,
               //const Divider(color: Colors.grey,),
               //const SizedBox(height: 10,),
               ProfileMenuWidget(title: "Logout",

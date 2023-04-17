@@ -1,14 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
+// ignore: must_be_immutable
 import 'dart:developer';
 
-import 'package:dental_appointment_anuska_fyp/utils/constants.dart';
-import 'package:dental_appointment_anuska_fyp/views/pages/home_page.dart';
+import 'package:dental_appointment_anuska_fyp/views/pages/tabs/appointment_tab.dart';
+import 'package:dental_appointment_anuska_fyp/views/payments/khalti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../Controller/schedule_controller.dart';
-import '../../../controller/appointment_controller.dart';
 
-// ignore: must_be_immutable
+import '../../../controller/appointment_controller.dart';
+import '../../../controller/schedule_controller.dart';
+import '../../../utils/constants.dart';
+
 class BookAppointment extends StatefulWidget {
   String? id;
   String? doctorName;
@@ -27,17 +31,32 @@ class _BookAppointmentState extends State<BookAppointment> {
   String startTimeController = "0";
   String endTimeController = "0";
 
-  bool _isChecked = false;
+  //bool _isChecked = false;
+  late List<bool> _isCheckedList;
 
   void getSelectedDaySchedules(
-      {required DateTime selectedDate, required String doctorId}) {
+      {required DateTime selectedDate, required String doctorId}) async {
     int dayOfWeek;
-
     dayOfWeek = (selectedDate.weekday - 1) % 7;
 
     String doctorId1 = doctorId.toString();
-    scheduleController.getSchedule(
-        doctorid: doctorId1, dayofweek: dayOfWeek.toString());
+
+    await scheduleController.getSchedule(
+        date: dateController.text.toString(),
+        doctorid: doctorId1,
+        dayofweek: dayOfWeek.toString());
+    if (scheduleController.scheduleList.value.isNotEmpty) {
+      _isCheckedList = List.generate(
+          scheduleController.scheduleList.value.length, (index) => false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+            "There are no schedule available for this day. Please select another date"),
+        duration: Duration(seconds: 5),
+        backgroundColor: Colors.red,
+      )
+      );
+    }
   }
 
   @override
@@ -135,44 +154,42 @@ class _BookAppointmentState extends State<BookAppointment> {
                 ),
               ),
               Obx(() => (SizedBox(
-                    height:
-                        (scheduleController.scheduleList.value.length) * 70,
+                    height: (scheduleController.scheduleList.value.length) * 50,
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: scheduleController.scheduleList.value.length,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: SizedBox(
-                            height: 60,
-                            child: ListView(
-                              children: <Widget>[
-                                CheckboxListTile(
-                                  title: Text(
-                                      "From:${scheduleController.scheduleList.value[index].startTime!} TO:${scheduleController.scheduleList.value[index].endTime!}"),
-                                  value: _isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      _isChecked = value ?? false;
-                                      startTimeController = scheduleController
-                                          .scheduleList.value[index].startTime!;
-                                      endTimeController = scheduleController
-                                          .scheduleList.value[index].endTime!;
-                                    });
-                                  },
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  secondary: IconButton(
-                                    icon: const Icon(Icons.lock_clock),
-                                    onPressed: () {
-                                      setState(() {
-                                        _isChecked = !_isChecked;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                        return CheckboxListTile(
+                          title: Text(
+                              "From:${scheduleController.scheduleList.value[index].startTime!} TO:${scheduleController.scheduleList.value[index].endTime!}"),
+                          value: _isCheckedList[index],
+                          onChanged: (bool? value) {
+                            log("Hello");
+                            setState(() {
+                              // Update the selected state of the current tile
+                              _isCheckedList[index] = value ?? false;
+
+                              // Unselect other tiles if the current tile is selected
+                              if (_isCheckedList[index]) {
+                                _isCheckedList = List.generate(
+                                    _isCheckedList.length, (index) => false);
+                                _isCheckedList[index] = true;
+                                startTimeController = scheduleController
+                                    .scheduleList.value[index].startTime!;
+                                endTimeController = scheduleController
+                                    .scheduleList.value[index].endTime!;
+                              }
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                          secondary: IconButton(
+                            icon: const Icon(Icons.lock_clock),
+                            onPressed: () {
+                              setState(() {
+                                // Toggle the selected state of the current tile
+                                _isCheckedList[index] = !_isCheckedList[index];
+                              });
+                            },
                           ),
                         );
                       },
@@ -184,20 +201,28 @@ class _BookAppointmentState extends State<BookAppointment> {
                 children: [
                   InkWell(
                     onTap: () {
-                      appointmentController.addAppointment(
-                          doctorid: widget.id.toString(),
-                          fromTime: startTimeController,
-                          toTime: endTimeController,
-                          date: dateController.text);
-                      log("Message:${widget.id},$startTimeController,$endTimeController,${dateController.text}");
+                      if (startTimeController != "0") {
+                        appointmentController.addAppointment(
+                            doctorid: widget.id.toString(),
+                            fromTime: startTimeController,
+                            toTime: endTimeController,
+                            date: dateController.text);
+                        //log("Message:${widget.id},$startTimeController,$endTimeController,${dateController.text}");
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                "Please select a time from the available schedule"),
+                                backgroundColor: Colors.red,
+                                )
+                              );
+                      }
                     },
-                    // Get.to(
-                    //   () => const KhaltieApp()),
+                    
                     child: const Text(
                       "BOOK",
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         color: primaryColor,
                       ),
                     ),
@@ -207,7 +232,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                       width: 30,
                     ),
                   ),
-
                   //Booking Cancellation
                   TextButton(
                     onPressed: () => showDialog<String>(
@@ -228,11 +252,12 @@ class _BookAppointmentState extends State<BookAppointment> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.pushReplacement(
-                              context, MaterialPageRoute(
-                                builder:(context)=>const HomePage()
-                                )
-                              ),
+                            onPressed: () =>  Navigator.push(context,
+                                    MaterialPageRoute(
+                                  builder: (context) {
+                                     return AppointmentTab();
+                                  },
+                                )),
                             child: const Text(
                               'Confirm',
                               style: TextStyle(color: primaryColor),
@@ -246,7 +271,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                       style: TextStyle(
                         fontSize: 20,
                         color: primaryColor,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                       ),
                       softWrap: false,
                     ),
