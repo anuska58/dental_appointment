@@ -22,7 +22,7 @@ class ReportComponent extends StatelessWidget {
             onTap: () => Get.to(PatientReport(report: report)),
             child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 224, 241, 255),
+                  color: const Color.fromARGB(255, 224, 241, 255),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(

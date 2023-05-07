@@ -1,12 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dental_appointment_anuska_fyp/utils/constants.dart';
 import 'package:dental_appointment_anuska_fyp/views/pages/home_page.dart';
-import 'package:dental_appointment_anuska_fyp/views/pages/tabs/appointment_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khalti/khalti.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-import '../pages/profile/appointmentDetails.dart';
 
 class KhaltieApp extends StatelessWidget {
   
@@ -96,15 +96,15 @@ class _WalletPaymentState extends State<WalletPayment> {
 
               final initiationModel = await Khalti.service.initiatePayment(
                 request: PaymentInitiationRequestModel(
-                  amount: 1000,
+                  amount: 100,
                   mobile: _mobileController.text,
-                  productIdentity: 'mac-mini',
-                  productName: 'Apple Mac Mini',
+                  productIdentity: 'appCharges',
+                  productName: 'Appointment Charges',
                   transactionPin: _pinController.text,
-                  productUrl: 'https://khalti.com/bazaar/mac-mini-16-512-m1',
+                  //productUrl: 'https://khalti.com/bazaar/mac-mini-16-512-m1',
                   additionalData: {
-                    'vendor': 'Oliz Store',
-                    'manufacturer': 'Apple Inc.',
+                    'vendor': 'Perfect Dental',
+                    'manufacturer': 'Perfect Dental',
                   },
                 ),
               );
@@ -141,18 +141,18 @@ class _WalletPaymentState extends State<WalletPayment> {
                       transactionPin: _pinController.text,
                     ),
                   );
-                  // showDialog(
-                  // context: (context), 
-                  // builder: (context){
-                  // return AlertDialog(
-                  //   title: const Text('Payment Successful'),
-                  //   content: Text ('Verification Token: ${model.token}'),
-                  //   );
-                  // }
+                  showDialog(
+                  context: (context), 
+                  builder: (context){
+                  return AlertDialog(
+                    title: const Text('Payment Successful'),
+                    content: Text ('Verification Token: ${model.token}'),
+                    );
+                  }
                   
-                  // );
+                  );
                    showMessage(message: 'Payment Successful\nAppointment Booked Successfully');
-                   Get.to(HomePage());
+                   Get.to(const HomePage());
 
                   debugPrint(model.toString());
                 } catch (e) {
@@ -166,7 +166,7 @@ class _WalletPaymentState extends State<WalletPayment> {
              style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
               ),
-            child: const Text('PAY Rs. 10'),
+            child: const Text('PAY Rs. 100'),
           ),
         ],
       ),

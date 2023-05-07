@@ -1,10 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 // ignore: must_be_immutable
-import 'dart:developer';
-
 import 'package:dental_appointment_anuska_fyp/views/pages/tabs/appointment_tab.dart';
-import 'package:dental_appointment_anuska_fyp/views/payments/khalti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -164,7 +161,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                               "From:${scheduleController.scheduleList.value[index].startTime!} TO:${scheduleController.scheduleList.value[index].endTime!}"),
                           value: _isCheckedList[index],
                           onChanged: (bool? value) {
-                            log("Hello");
+                            //log("Hello");
                             setState(() {
                               // Update the selected state of the current tile
                               _isCheckedList[index] = value ?? false;

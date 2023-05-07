@@ -24,12 +24,12 @@ class _MyAppointmentsPageState extends State<MyAppointmentsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Appointments'),
+        title: const Text('My Appointments'),
         backgroundColor: primaryColor,
       ),
       body: Obx(() {
         if (_appointmentController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           return ListView.builder(
             itemCount: _appointmentController.appointmentList.length,
@@ -38,7 +38,7 @@ class _MyAppointmentsPageState extends State<MyAppointmentsPage> {
                   _appointmentController.appointmentList[index];
               return ListTile(
                 title: Text('Doctor ID:${appointment.doctorId}',
-                style: TextStyle(fontWeight: FontWeight.w600),),
+                style: const TextStyle(fontWeight: FontWeight.w600),),
                 subtitle: Text(
                     '${appointment.date} ${appointment.fromTime} - ${appointment.toTime}'),
                     trailing: Text('${appointment.status}'),

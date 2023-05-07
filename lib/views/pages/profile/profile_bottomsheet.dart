@@ -46,7 +46,8 @@ class ProfileBottomSheet extends StatelessWidget {
     );
   }
   logout() async{
-  await authentication.logout();
-  Get.offAll(const Loader());
+  authentication.logout() ;
+  Get.offAll(()=>const Loader());
+  
   }
 }

@@ -12,14 +12,14 @@ class MyDialogue extends StatelessWidget {
        content: const Text("Are you sure you want to cancel?"),
            actions: <Widget>[
              TextButton(
-               child: Text('Confirm'),
+               child: const Text('Confirm'),
                onPressed: () {
                  print('Confirmed');
                  Navigator.of(context).pop();
                },
              ),
              TextButton(
-               child: Text('Cancel'),
+               child: const Text('Cancel'),
                onPressed: () {
                  Navigator.of(context).pop();
                },

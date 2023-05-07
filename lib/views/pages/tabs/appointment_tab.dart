@@ -63,10 +63,11 @@ class AppointmentTab extends StatelessWidget {
                           child: Card(
                             elevation: 8.0,
                             child: ListTile(
-                              leading: const Icon(
-                                Icons.person,
-                                size: 100,
-                              ),
+                              leading: Image.asset(
+                                    "assets/images/logo.png",
+                                    height: 100,
+                                    width: 100,
+                                  ),
                               title: Text(
                                   controller.doctorsList.value[index].name!,
                                   style: const TextStyle(

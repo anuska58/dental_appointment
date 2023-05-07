@@ -4,14 +4,11 @@ import 'dart:developer';
 import 'package:dental_appointment_anuska_fyp/models/appointment.dart';
 import 'package:dental_appointment_anuska_fyp/utils/api.dart';
 import 'package:dental_appointment_anuska_fyp/utils/constants.dart';
-import 'package:dental_appointment_anuska_fyp/views/payments/khalti.dart';
 //import 'package:dental_appointment_anuska_fyp/views/pages/profile/appointment.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/doctors.dart';
 import '../utils/shared_prefs.dart';
+import '../views/payments/khalti.dart';
 
 class AppointmentController extends GetxController {
   AuthService authService = AuthService();
@@ -50,8 +47,8 @@ class AppointmentController extends GetxController {
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       if (jsonResponse["success"]) {
-        Get.to(KhaltieApp());
-       //await showMessage(message: jsonResponse["message"]);
+        //Get.to(const KhaltieApp());
+       await showMessage(message: jsonResponse["message"]);
         return true;
       } else {
         showMessage(message: jsonResponse["message"], isSuccess: false);
@@ -105,50 +102,4 @@ class AppointmentController extends GetxController {
 
 
 
-  // static getAcceptedAppointment() async {
-  //   var pref = await SharedPreferences.getInstance();
-  //   var id = pref.getString('id');
-  //   var data = {'id': id!};
-  //  // var url = Uri.parse(ACCEPTED_APPOINMENT_API);
-  //   var response = await http.post(url, body: data);
-  //   if (response.statusCode == 200) {}
-  //   var appointmentList = json.decode(response.body);
-  //   final appointments = appointmentList
-  //       .map<AppointmentModel>((json) => AppointmentModel.fromJson(json))
-  //       .toList();
-  //   return appointments;
-  // }
-
-//   static getRejectedAppointment() async {
-//     var pref = await SharedPreferences.getInstance();
-//     var id = pref.getString('id');
-//     var data = {'id': id!};
-//     var url = Uri.parse(REJECTED_APPOINMENT_API);
-//     var response = await http.post(url, body: data);
-//     if (response.statusCode == 200) {}
-//     var appointmentList = json.decode(response.body);
-//     final appointments = appointmentList
-//         .map<AppointmentModel>((json) => AppointmentModel.fromJson(json))
-//         .toList();
-//     return appointments;
-//   }
-
-//   static getPatientById(String id) async {
-//     try {
-//       var pref = await SharedPreferences.getInstance();
-//       String? id = pref.getString('id');
-//       var data = <String, String>{};
-//       data['id'] = id!;
-//       var url = Uri.parse(GET_PATIENT_API);
-//       final response = await http.post(url, body: data);
-//       var list = json.decode(response.body);
-//       final doctorsArray =
-//           list.map<Doctor>((json) => Doctor.fromJson(json)).toList();
-//       return doctorsArray;
-//     } catch (e) {
-//       log("Error while getting the user by id $id");
-//       log("Error:${e.toString()}");
-//       return [];
-//     }
-//   }
-// }
+  

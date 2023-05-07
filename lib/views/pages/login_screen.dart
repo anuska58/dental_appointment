@@ -80,15 +80,15 @@ class LoginScreen extends StatelessWidget {
                         // }  
                   },
                   text: "Login"),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("Forgot Password?",
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor)),
-                  ),
+                  // const Padding(
+                  //   padding: EdgeInsets.all(8.0),
+                  //   child: Text("Forgot Password?",
+                  //       style: TextStyle(
+                  //           fontFamily: 'Poppins',
+                  //           fontSize: 16,
+                  //           fontWeight: FontWeight.bold,
+                  //           color: primaryColor)),
+                  // ),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text("Don't have an account?",
